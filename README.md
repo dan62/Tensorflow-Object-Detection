@@ -61,12 +61,64 @@ then go to line 129 and change num_examples to the number of images that you pla
    python train.py --logtostderr --train_dir=training/ --pipeline_config_path=training/faster_rcnn_inception_v2_pets.config
  
    ```
+   when training is complete we need to create the frozen infference model we can do this by finding out the training model with the highest number after model for example model.ckpt-9759, the four digits which are highest in that folder is the model we need to load into the frozen inffernce graph, we do this by running the command and replacing XXXX with the model number:
+
+    ```
+    python export_inference_graph.py --input_type image_tensor --pipeline_config_path training/faster_rcnn_inception_v2_pets.config --trained_checkpoint_prefix training/model.ckpt-XXXX --output_directory inference_graph
+    ```
+
 
 6. Leave the model to train you should see the terminal flooding with text, training really depends on the hardware specifications of your pc and wheather or not you are using a gpu. Although you can exit the terminal anytime that you feel necessary the model will automatically create a checkpoint to begin from next time.
 
 * If you you like to retrain an existing trained model you would need to delete all the images in the images/test and images/train folders, also delete all files in the training folder except for the following faster_rcnn, labelmap, pipeline. You would also need to delete everything in the inferance_graph folder as well as test.record and train.record files. Once all is done repeat steps 1 - 6 . 
 
+
+## Testing your trained model
+I have coded a few custom scripts some which were present by default and some with modifications to allow for some cool new features for your model, please follow the steps below to test your model:
+
+1. Open anaconda terminal and paste the following if your using windows (if Linux ignore the second command and ammend the third command to the location of the source files):
+   ```
+     activate tensor
+ 
+     set PYTHONPATH=C:\TensorExample\models;C:\TensorExample\models\research;C:\TensorExample\models\research\slim
+ 
+     cd C:\TensorExample\models\research\
+    
+    protoc --python_out=. .\object_detection\protos\anchor_generator.proto .\object_detection\protos\argmax_matcher.proto .\object_detection\protos\bipartite_matcher.proto .\object_detection\protos\box_coder.proto .\object_detection\protos\box_predictor.proto .\object_detection\protos\eval.proto .\object_detection\protos\faster_rcnn.proto .\object_detection\protos\faster_rcnn_box_coder.proto .\object_detection\protos\grid_anchor_generator.proto .\object_detection\protos\hyperparams.proto .\object_detection\protos\image_resizer.proto .\object_detection\protos\input_reader.proto .\object_detection\protos\losses.proto .\object_detection\protos\matcher.proto .\object_detection\protos\mean_stddev_box_coder.proto .\object_detection\protos\model.proto .\object_detection\protos\optimizer.proto .\object_detection\protos\pipeline.proto .\object_detection\protos\post_processing.proto .\object_detection\protos\preprocessor.proto .\object_detection\protos\region_similarity_calculator.proto .\object_detection\protos\square_box_coder.proto .\object_detection\protos\ssd.proto .\object_detection\protos\ssd_anchor_generator.proto .\object_detection\protos\string_int_label_map.proto .\object_detection\protos\train.proto .\object_detection\protos\keypoint_box_coder.proto .\object_detection\protos\multiscale_anchor_generator.proto .\object_detection\protos\graph_rewriter.proto
+    
+    python setup.py build
+    
+    python setup.py install
+    
+    cd object_detection
+   ```
+2. There are various scripts that you can test your model that include:
+
+   Testing it using live webcam feed
+   ```
+   python Object_detection_webcam.py
+   ```
+
+   Testing it using a video
+   ```
+   python Object_detection_video.py
+   ```
+
+   Testing it using an image
+   ```
+   python Object_detection_image.py
+   ```
    
+   Testing from a screen capture
+   ```
+   python Grab_and_detect.py
+   ```
+
+   Testing from rtsp stream (please open in the IDE and edit the video link to accomodate the rtsp link)
+   ```
+   python live_rtsp.py
+   ```
+
 ## Understanding Tensorflow Object Detection
 The Tensorflow object detection API makes decisions based on what its trained, the training data is kept in our case is kept in the images folder. Our training data should generally be split into two groups of data which is [Train and Test](https://github.com/dan62/Tensorflow-Object-Detection/tree/master/images), we do this so that the model tests the trained model using a good random mix of test data, with more itterations of training the model becomes smarter as it adjusts the Weights and Biases appropriatly based on the correctly predicted frames. It is highly recommended to split the training data 80% of images should go to train and 20% goes to the test folder, we should also ensure a random mix of images in both folders, however the test data should be relavent to what we trained it on or else our model will never achieve 100% success. 
 
