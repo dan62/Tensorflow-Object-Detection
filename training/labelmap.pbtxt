@@ -1,0 +1,29 @@
+item {
+  id: 1
+  name: 'Label1'
+}
+
+item {
+  id: 2
+  name: 'Label2'
+}
+
+item {
+  id: 3
+  name: 'Label3'
+}
+
+item {
+  id: 4
+  name: 'Label4'
+}
+
+item {
+  id: 5
+  name: 'Label5'
+}
+
+item {
+  id: 6
+  name: 'Label6'
+}
