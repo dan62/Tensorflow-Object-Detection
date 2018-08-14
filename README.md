@@ -3,16 +3,25 @@ This repository explains how to setup Tensorflow  with cpu and gpu for object de
 
 ## Getting Started 
 1. You will first need to settup the environment for the tensorflow model to work correctly, the process differs slighly 
-   between Linux based systems and Windows based system, please follow the correct link that identifies your system and proceed with instructions to get started
+   between [Linux Based Systems](https://github.com/dan62/Tensorflow-Object-Detection/blob/master/Linux_Settup.md) and [Windows Based Systems](https://github.com/dan62/Tensorflow-Object-Detection/blob/master/Windows_Settup.md) , please follow the correct link that identifies your system and proceed with instructions to get started
    
 2. Create a folder in your C drive and name it TensorExample
 
-3. Clone the respositoy from the official tensorflow github respository by following this link
+3. Clone the respositoy from the official tensorflow github respository by following this [Link](https://github.com/tensorflow/models)
 
 4. Unzip the respository and place it in the TensorExample folder 
 
 5. Clone this respository and unzip it to the Object Detection folder located in C://TensorExample/models/research/object detection/
    ensure that you overwrite all files if prompted
+
+6. Navigate to the directory C://TensorExample/models/research/build/lib/object_detection/utils/learning_schedules.py file and replace lines 
+   167-169 with the following code:
+   
+   ```
+   rate_index = tf.reduce_max(tf.where(tf.greater_equal(global_step, boundaries),
+   list(range(num_boundaries)),
+   [0] * num_boundaries))
+   ```
    
    
 ## Understanding Tensorflow Object Detection

@@ -41,8 +41,10 @@ detection_classes = detection_graph.get_tensor_by_name('detection_classes:0')
 
 num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 
-#video = cv2.VideoCapture("rtsp://192.168.42.1/live")
 
+#Please add your own video below using a simialr format 
+
+#video = cv2.VideoCapture("rtsp://192.168.42.1/live")
 #video = cv2.VideoCapture("rtsp://freja.hiof.no:1935/rtplive/_definst_/hessdalen03.stream")
 #video = cv2.VideoCapture("http://www.fling.asia/test2.MOV")
 video = cv2.VideoCapture("test_og.mp4")
@@ -83,17 +85,6 @@ while(True):
     # Press 'q' to quit
     if cv2.waitKey(1) == ord('q'):
         break
-    '''
-    vis_util._visualize_boxes_and_keypoints(
-        frame,
-        np.squeeze(boxes),
-        np.squeeze(classes).astype(np.int32),
-        np.squeeze(scores),
-        category_index,"use_normalized_coordinates=True,line_thickness=8,min_score_thresh=0.85")
-
-  
-    cv2.imshow('Object detector', frame)
-   '''
 
 
 # Clean up
