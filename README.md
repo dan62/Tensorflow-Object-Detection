@@ -62,9 +62,9 @@ then go to line 129 and change num_examples to the number of images that you pla
  
    ```
 
-   6. Leave the model to train you should see the terminal flooding with text, training really depends on the hardware specifications of your pc and wheather or not you are using a gpu. Although you can exit the terminal anytime that you feel necessary the model will automatically create a checkpoint to begin from next time.
+6. Leave the model to train you should see the terminal flooding with text, training really depends on the hardware specifications of your pc and wheather or not you are using a gpu. Although you can exit the terminal anytime that you feel necessary the model will automatically create a checkpoint to begin from next time.
 
-   * If you you like to retrain an existing trained model you would need to delete all the images in the images/test and images/train folders, also delete all files in the training folder except for the following faster_rcnn, labelmap, pipeline. You would also need to delete everything in the inferance_graph folder as well as test.record and train.record files. Once all is done repeat steps 1 - 6 . 
+* If you you like to retrain an existing trained model you would need to delete all the images in the images/test and images/train folders, also delete all files in the training folder except for the following faster_rcnn, labelmap, pipeline. You would also need to delete everything in the inferance_graph folder as well as test.record and train.record files. Once all is done repeat steps 1 - 6 . 
 
    
 ## Understanding Tensorflow Object Detection
