@@ -31,7 +31,7 @@ Since this is a clean tensorflow directory, we just need to follow the following
 2. Open the pipeline.config file in the training folder and edit line 9 with the number of classes that you added to the label map, 
 then go to line 129 and change num_examples to the number of images that you plan to train your model on
 
-3. Collect as much trainiung images as you can find and place 80% of these images to the images/train folder and 0% of these images to      images/test folder  
+3. Collect as much trainiung images as you can find and place 80% of these images to the images/train folder and 20% of these images to      images/test folder  
 
 4. Install [LabelImg](https://github.com/tzutalin/labelImg) and open it then select the train directory and start drawing boxes around the objects that you would like the model to detect and add labels to them do the same for the test folder and save each time you have marked an image
 
